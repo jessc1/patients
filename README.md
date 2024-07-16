@@ -26,6 +26,11 @@ python manage.py seed-db
 ```
 python manage.py seed-db
 ```
+
+### Para rodar testes
+```
+python manage.py test
+```
 ### Tecnologias :
 * Python
 * Flask
