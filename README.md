@@ -24,7 +24,7 @@ python manage.py seed-db
 ```
 ### Para rodar api 
 ```
-python manage.py seed-db
+python manage.py run
 ```
 
 ### Para rodar testes
