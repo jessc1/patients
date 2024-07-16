@@ -54,48 +54,44 @@ def get_patient(id):
             'birth_date': patient.birth_date,
             'phone':patient.phone,
             'email': patient.email,
+            'address':patient.address,
             'medical_history': patient.medical_history,               
-            
          }
-           
       }   
       return jsonify(response_object), 200
    except ValueError:
       return jsonify(response_object), 404
-   
-      
-
 
 @patients_blueprint.route('/patients', methods=['GET'])
-def get_patients():
+def get_patients():        
    res = {}
    for patient in Patient.query.all():
       for visit in Visita.query.all():
-         if patient.id == visit.patient_id:
-            res[patient.id] ={
+         if patient.id == visit.patient_id:                 
+            res[patient.id] = {
                'name': patient.name,
                'age': patient.age,
                'phone': patient.phone,
                'email': patient.email,
                'last_visit_summary': f"Visit on {visit.visit_date} : {patient.medical_history}"
-            }
+            }           
+            
    return jsonify(res),200  
-
-
 
 @patients_blueprint.route('/patients/<int:id>', methods=['PUT'])
 def update_patient(id):
-   data = request.to_dict()
-   patient = Patient.query.get(id)
-   patient.name = request['name']   
-   patient.address = request['address']
-   patient.phone = request['phone']
-   patient.email = request['email']
-   patient.medical_history = ['medical_history']
-   db.session.commit()
-   response = Patient.query.get(id).to_dict()
-   return jsonify(response)
-
+      try:
+         patient = Patient.query.filter_by(id=id).first()
+         if patient:
+               data = request.get_json()
+               patient.email = data['email']
+               patient.address = data['address']
+               patient.phone = data['phone']
+               db.session.commit()
+               return jsonify({ 'message': 'patient updated'}),200
+         return jsonify({'message': 'patient not found'}),400
+      except ValueError as e:
+         return jsonify({'message': 'error updating patient'})
 
         
 
