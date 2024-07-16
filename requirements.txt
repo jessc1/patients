@@ -2,4 +2,4 @@ Flask
 SQLAlchemy
 psycopg2
 sqlalchemy-serializer
-Flask cli
+flask-cli
