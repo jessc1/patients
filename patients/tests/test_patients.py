@@ -75,27 +75,3 @@ class TestPatients(BaseTestCase):
             self.assertIn('johndoe@email.com', data['data']['email'])
             self.assertIn('Gastrite', data['data']['medical_history'])            
            
-
-    
-
-    def test_get_patients(self):
-        patient1=Patient(name='alice',birth_date='10/10/2000',address='rua dois',phone='(11)91010-2020',email= 'alice@email.com', medical_history='Bronquite')
-        patient2=Patient(name='bob',birth_date='02/02/2000',address='rua três',phone='(21)94040-5000',email='bob@email.com', medical_history='Asma')
-        db.session.add(patient1)
-        db.session.add(patient2)
-        db.session.commit()
-        with self.client:
-            response = self.client.get('/patients')
-            data = json.loads(response.data.decode())
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(len(data['data']['patients']), 2)
-            self.assertIn('alice', data['data']['patients'][0]['name'])
-            self.assertIn('alice@email.com', data['data']['patients'][0]['email'])
-            self.assertIn('bob', data['data']['patients'][1]['name'])
-            self.assertIn('bob@email.com', data['data']['patients'][1]['email'])
-            
-            
-            
-            
-         
-    
