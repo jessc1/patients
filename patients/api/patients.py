@@ -71,13 +71,14 @@ def get_patients():
    res = {}
    for patient in Patient.query.all():
       for visit in Visita.query.all():
-         res[patient.id] ={
-            'name': patient.name,
-            'age': patient.age,
-            'phone': patient.phone,
-            'email': patient.email,
-            'last_visit_summary': f"Visit on {visit.visit_date} : {patient.medical_history}"
-         }
+         if patient.id == visit.patient_id:
+            res[patient.id] ={
+               'name': patient.name,
+               'age': patient.age,
+               'phone': patient.phone,
+               'email': patient.email,
+               'last_visit_summary': f"Visit on {visit.visit_date} : {patient.medical_history}"
+            }
    return jsonify(res),200  
 
 

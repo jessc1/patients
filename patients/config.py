@@ -9,13 +9,13 @@ class BaseConfig:
 
 class DevelopmentConfig(BaseConfig):
     """ Development Configuration """
-    SQLALCHEMY_DATABASE_URI ='postgresql://usuario:senha@localhost:5432/dev.db'
+    SQLALCHEMY_DATABASE_URI ='postgresql://postgres:mktj@localhost:5432/kompa_dev'
     DEBUG = True
  
 
 class ProductionConfig(BaseConfig):
     """Production Configuration"""
-    SQLALCHEMY_DATABASE_URI ='postgresql://usuario:senha@localhost:5432/prod.db'
+    SQLALCHEMY_DATABASE_URI ='postgresql://postgres:mktj@localhost:5432/kompa_prod'
     
 
 
