@@ -1,0 +1,2 @@
+CREATE DATABASE kompa_dev;
+CREATE DATABASE kompa_prod;
